@@ -1,189 +1,12 @@
-const productos = [
-    {
-        id: "conjunto-01",
-        titulo: "Conjunto 01",
-        imagen: "./img/conjuntos/01.png",
-        categoria: {
-            nombre: "Conjuntos",
-            id: "conjuntos"
-        },
-        precio: 14000
-    },
-    {
-        id: "conjunto-02",
-        titulo: "Conjunto 02",
-        imagen: "./img/conjuntos/02.png",
-        categoria: {
-            nombre: "Conjuntos",
-            id: "conjuntos"
-        },
-        precio: 13800
-    },
-    {
-        id: "conjunto-03",
-        titulo: "Conjunto 03",
-        imagen: "./img/conjuntos/03.png",
-        categoria: {
-            nombre: "Conjuntos",
-            id: "conjuntos"
-        },
-        precio: 13800
-    },
-    {
-        id: "conjunto-04",
-        titulo: "Conjunto 04",
-        imagen: "./img/conjuntos/04.png",
-        categoria: {
-            nombre: "Conjuntos",
-            id: "conjuntos"
-        },
-        precio: 14000
-    },
-    {
-        id: "conjunto-05",
-        titulo: "Conjunto 05",
-        imagen: "./img/conjuntos/05.png",
-        categoria: {
-            nombre: "Conjuntos",
-            id: "conjuntos"
-        },
-        precio: 12900
-    },
+let productos = [];
 
-    {
-        id: "remera-01",
-        titulo: "Remera 01",
-        imagen: "./img/remeras/01.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 5900
-    },
-    {
-        id: "remera-02",
-        titulo: "Remera 02",
-        imagen: "./img/remeras/02.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 5900
-    },
-    {
-        id: "remera-03",
-        titulo: "Remera 03",
-        imagen: "./img/remeras/03.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 5100
-    },
-    {
-        id: "remera-04",
-        titulo: "Remera 04",
-        imagen: "./img/remeras/04.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 6500
-    },
-    {
-        id: "remera-05",
-        titulo: "Remera 05",
-        imagen: "./img/remeras/05.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 5900
-    },
-    {
-        id: "remera-06",
-        titulo: "Remera 06",
-        imagen: "./img/remeras/06.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 6500
-    },
-    {
-        id: "remera-07",
-        titulo: "Remera 07",
-        imagen: "./img/remeras/07.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 6500
-    },
-    {
-        id: "remera-08",
-        titulo: "Remera 08",
-        imagen: "./img/remeras/08.png",
-        categoria: {
-            nombre: "Remeras",
-            id: "remeras"
-        },
-        precio: 6500
-    },
-   
-    {
-        id: "jogging-01",
-        titulo: "Jogging 01",
-        imagen: "./img/joggings/01.png",
-        categoria: {
-            nombre: "Joggings",
-            id: "joggings"
-        },
-        precio: 13500
-    },
-    {
-        id: "jogging-02",
-        titulo: "Jogging 02",
-        imagen: "./img/joggings/02.png",
-        categoria: {
-            nombre: "Joggings",
-            id: "joggings"
-        },
-        precio: 7300
-    },
-    {
-        id: "jogging-03",
-        titulo: "Jogging 03",
-        imagen: "./img/joggings/03.png",
-        categoria: {
-            nombre: "Joggings",
-            id: "joggings"
-        },
-        precio: 7900
-    },
-    {
-        id: "jogging-04",
-        titulo: "Jogging 04",
-        imagen: "./img/joggings/04.png",
-        categoria: {
-            nombre: "Joggings",
-            id: "joggings"
-        },
-        precio: 7900
-    },
-    {
-        id: "jogging-05",
-        titulo: "Jogging 05",
-        imagen: "./img/joggings/05.png",
-        categoria: {
-            nombre: "Joggings",
-            id: "joggings"
-        },
-        precio: 7900
-    }
-];
-
-
+fetch("./js/productos.json")
+    .then(response => response.json())
+    .then(data => {
+        productos = data;
+        cargarProductos(productos);
+    })
+    
 const contenedorProductos = document.querySelector("#contenedor-productos");
 const botonesCategorias = document.querySelectorAll(".boton-categoria");
 const tituloPrincipal = document.querySelector("#titulo-principal");
@@ -255,6 +78,25 @@ if (productosEnCarritoLS) {
 }
 
 function agregarAlCarrito(e) {
+    Toastify({
+        text: "Producto agregado",
+        duration: 3000,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, #100d1d, #785ce9)",
+          borderRadius: "2rem",
+          textTransform: "uppercase",
+          fontSize: "1.1rem"
+        },
+        offset: {
+              x: '1,5 rem', // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+              y: '1,5 rem' // vertical axis - can be a number or a string indicating unity. eg: '2em'
+            },
+        onClick: function(){} // Callback after click
+      }).showToast();
     const idBoton = e.currentTarget.id;
     const productoAgregado = productos.find(producto => producto.id === idBoton);
 
